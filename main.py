@@ -1,16 +1,34 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+# Entrypoint for Game
+from player import HumanPlayer, pygame
+from screen import Screen
+from game import Game
+import sys
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def playgame(screen, player, game):
+    game_over = False
+    while not game_over:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    player.x_pos -= player.size
+                elif event.key == pygame.K_RIGHT:
+                    player.x_pos += player.size
+        game.spawn_enemies(screen.w)
+        game.update_enemy_positions(screen.h)
+        game.set_level()
+        screen.update_screen(game.enemy_list, player, game.score)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+        if game.collision_check(player):
+            game_over = True
+            break
+
+
+if __name__ == "__main__":
+    pygame.init()
+    screen = Screen()
+    player = HumanPlayer(x_pos=screen.w / 2, y_pos=500)
+    game = Game()
+    playgame(screen, player, game)

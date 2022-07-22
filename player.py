@@ -4,10 +4,10 @@ from pcolour import Color
 
 
 class Player:
-    def __init__(self, size, x_pos, y_pos, color=Color.BLUE):
-        self.size = size
+    def __init__(self, x_pos, y_pos, size, color=Color.BLUE):
         self.x_pos = x_pos
         self.y_pos = y_pos
+        self.size = size
         self.color = color
 
     def draw(self, screen):
@@ -25,14 +25,14 @@ class Player:
 
 class Enemy(Player):
     def __init__(self, x_pos, y_pos):
-        super.__init__(x_pos, y_pos, size=50, color=Color.RED)
+        super().__init__(x_pos, y_pos, size=50, color=Color.RED)
 
 
 class BigEnemy(Player):
     def __init__(self, x_pos, y_pos):
-        super.__init__(x_pos, y_pos, size=100, color=Color.YELLOW)
+        super().__init__(x_pos, y_pos, size=100, color=Color.YELLOW)
 
 
 class HumanPlayer(Player):
     def __init__(self, x_pos, y_pos):
-        super.__init__(x_pos, y_pos, size=50, color=Color.GREEN)
+        super().__init__(x_pos, y_pos, size=50, color=Color.GREEN)

@@ -3,7 +3,7 @@ from player import Enemy
 
 
 class Game:
-    def __init__(self, speed, score, max_enemies=15, delay=0.1):
+    def __init__(self, speed=10, score=0, max_enemies=15, delay=0.1):
         self.speed = speed
         self.score = score
         self.max_enemies = max_enemies
@@ -25,6 +25,21 @@ class Game:
                 enemy.y_pos += self.speed
                 new_enemy_list.append(enemy)
             else:
-                self.enemy_list.pop(enemy)
                 self.score += 1
         self.enemy_list = new_enemy_list
+
+    def set_level(self):
+        if self.score < 20:
+            self.speed = 5
+        elif self.score < 40:
+            self.speed = 8
+        elif self.score < 60:
+            self.speed = 12
+        else:
+            self.speed = 15
+
+    def collision_check(self, player):
+        for enemy in self.enemy_list:
+            if enemy.collision(player):
+                return True
+        return False

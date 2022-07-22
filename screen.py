@@ -30,7 +30,7 @@ class Screen:
         self.draw_enemies(enemy_list)
         self.draw_player(player)
         self.draw_score(score)
-        self.clock.tick = self.clock_tick
+        self.clock.tick(self.clock_tick)
         pygame.display.update()
 
     def refresh_s(self):
