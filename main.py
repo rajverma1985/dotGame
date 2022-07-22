@@ -22,13 +22,12 @@ def playgame(screen, player, game):
         screen.update_screen(game.enemy_list, player, game.score)
 
         if game.collision_check(player):
-            game_over = True
             break
 
 
 if __name__ == "__main__":
     pygame.init()
     screen = Screen()
-    player = HumanPlayer(x_pos=screen.w / 2, y_pos=500)
+    player = HumanPlayer(screen.w / 2, screen.h - 100)
     game = Game()
     playgame(screen, player, game)
